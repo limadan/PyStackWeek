@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib import auth
 from django.contrib.messages import constants
+from django.template import RequestContext
 
 def cadastro(request):
     if request.method == "GET":
@@ -33,7 +34,6 @@ def cadastro(request):
             return redirect('/auth/cadastro')
 
 # Create your views here.
-
 def login(request):
     if request.method == "GET":
         if request.user.is_authenticated:
@@ -50,7 +50,7 @@ def login(request):
             return redirect('/auth/login')
         else:
             auth.login(senha, usuario)
-            return HttpResponse("Login Efetuado com sucesso")
+            return redirect('/')
 
 def sair(request):
     auth.logout(request)
